@@ -27,3 +27,11 @@ jobs:
         name: TikTokLiveViewer
         path: app/build/outputs/apk/debug/
         overwrite: true
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: app/build/outputs/apk/debug/app-debug.apk
+        tag_name: v1.0.${{ github.run_number }}
+        name: Release v1.0.${{ github.run_number }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
