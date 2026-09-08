@@ -1,4 +1,3 @@
-
 plugins {
     id 'com.android.application'
 }
@@ -6,24 +5,41 @@ plugins {
 android {
     namespace 'com.tiktok.liveviewer'
     compileSdk 34
+
     defaultConfig {
         applicationId "com.tiktok.liveviewer"
-        minSdk 21
+        minSdk 21          // Android 5.0 Lollipop
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
+
     buildTypes {
-        release { minifyEnabled false }
-        debug { minifyEnabled false }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
     }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.4'
 }
